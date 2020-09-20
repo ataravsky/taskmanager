@@ -1,0 +1,129 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="elements/top :: top"></div>
+<div th:replace="elements/header :: menu"></div>
+<div class="container">
+
+    <form th:action="@{/filter}" class="col s12" method="post">
+
+            <div class="form-group pad row">
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Авто:&nbsp;*</label>
+                    <input required placeholder="Марка" name="brand" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input placeholder="Модель"  name="model" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Год:&nbsp;*</label>
+                    <input required  placeholder="От" name="yearfrom" min="1950" max="2021" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input required placeholder="До" name="yearbefore" min="1950" max="2021" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Город:</label>
+                    <input placeholder="Город" name="city" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+
+
+            <div class="form-group pad row">
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-2 col-form-label col-form-label-sm">Цена&nbsp;USD:&nbsp;*</label>
+                    <input required placeholder="От" name="costfrom" min="0" max="999999" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input  required placeholder="До" name="costbefore" min="0" max="999999" type="number" class="form-control form-control-sm">
+                </div>
+
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Пробег:&nbsp;*</label>
+                    <input required placeholder="От" min="0" max="999999" name="mileagefrom" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input required placeholder="До" min="0" max="999999" name="mileagebefore" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Выгода:</label>
+                    <input required placeholder="От %" min="0" max="99" name="profit" type="number" class="form-control form-control-sm">
+                </div>
+
+            </div>
+
+
+            <div class="form-group row">
+            <div class="form-group col-md-2">
+                <label class="col-md-1 col-form-label col-form-label-sm">КПП:</label>
+                <input placeholder="КПП" name="transmission" type="text" class="form-control form-control-sm">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="col-md-2 col-form-label col-form-label-sm">Двигатель:</label>
+                <input placeholder="Двигатель" name="engine" type="text" class="form-control form-control-sm">
+            </div>
+                <div class="form-group col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Объем:</label>
+                    <input placeholder="От" name="capacityfrom" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input placeholder="До" min="0" max="12" name="capacitybefore" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <button class="btn btn-outline-primary btn-sm" type="submit">Добавить фильтр</button>
+                </div>
+            </div>
+
+
+        <div class="form-group row">
+            <div class="form-group col-md-7">
+                <p class="text-danger">* - поля обязательные для заполнения</p>
+            </div>
+        </div>
+    </form>
+
+    <H5>Ваши фильтры</H5>
+</div>
+
+
+<div class="table-responsive container ">
+    <table class="table table-sm table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Авто</th>
+            <th>Год</th>
+            <th>Цена</th>
+            <th>Город</th>
+            <th>КПП</th>
+            <th>Двигатель</th>
+            <th>Пробег</th>
+            <th>Объем</th>
+            <th>Выгода</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="filter : ${filter}">
+            <td ><a><a th:text="${filter.brand}"/> <a th:text="${filter.model}"/></a></td>
+            <td ><a><a th:text="${filter.yearfrom}"/>–<a th:text="${filter.yearbefore}"/></a></td>
+            <td ><a><a th:text="${filter.costfrom}"/>–<a th:text="${filter.costbefore}"/></a></td>
+            <td th:text="${filter.city}"></td>
+            <td th:text="${filter.transmission}"></td>
+            <td th:text="${filter.engine}"></td>
+            <td ><a><a th:text="${filter.mileagefrom}"/>–<a th:text="${filter.mileagebefore}"/></a></td>
+            <td ><a><a th:text="${filter.capacityfrom}"/>–<a th:text="${filter.capacitybefore}"/></a></td>
+            <td th:text="${filter.profit}"></td>
+            <td><a th:href="@{|/filter/${filter.id}/delete|}" class="btn btn-outline-danger btn-sm">Удалить</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
+</div>

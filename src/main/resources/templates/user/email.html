@@ -1,0 +1,37 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <div th:replace="elements/top :: top"></div>
+    <div th:replace="elements/header :: menu"></div>
+
+    <div th:each="el : ${user}" class="container">
+
+            <form th:if="${user.emailcode == 0}" method="post" th:action="@{|/user/${el.id}/email|}">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <input name="emailactivated" th:value="${el.emailactivated}" placeholder="Email" class="form-control"/>
+                    </div>
+                    <div th:if="${user.emailcode == 0}"  class="form-group col-md-2">
+                        <button type="submit" class="btn btn-outline-primary">Выслать код</button>
+                    </div>
+                </div>
+            </form>
+
+            <form th:if="${user.emailcode != 0}" method="post" th:action="@{|/user/${el.id}/email/code|}">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <input name="emailactivated" th:value="${el.emailactivated}" placeholder="Email" class="form-control"/>
+                    </div>
+                     <div class="form-group col-md-2">
+                         <input name="emailcode" placeholder="Код активации" class="form-control"/>
+                     </div>
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-outline-primary">Подтвердить Email</button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+
+    </body>
+    </html>
+</div>

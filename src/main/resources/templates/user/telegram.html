@@ -1,0 +1,22 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <div th:replace="elements/top :: top"></div>
+    <div th:replace="elements/header :: menu"></div>
+
+    <div th:each="el : ${user}" class="container">
+
+        <form  method="post" th:action="@{|/user/${el.id}/telegram|}">
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <input name="telegramactivated"  placeholder="Telegram код" class="form-control"/>
+                </div>
+                <div  class="form-group col-md-2">
+                    <button type="submit" class="btn btn-outline-primary">Подтвердить код</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    </body>
+    </html>
+</div>

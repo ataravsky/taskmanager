@@ -1,0 +1,119 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <div th:replace="elements/top :: top"></div>
+    <div th:replace="elements/header :: menu"></div>
+
+    <div class="container">
+
+        <form th:action="@{/auto1}" class="col s12" method="post">
+
+            <div class="form-group pad row">
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Авто:</label>
+                    <input  placeholder="Марка" name="brand" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input  placeholder="Модель"  name="model" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Пробег:</label>
+                    <input  placeholder="От"  name="mileagefrom" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input  placeholder="До"  name="mileagebefore" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Город:</label>
+                    <input  placeholder="Город"  name="city" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+
+            <div class="form-group pad row">
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Двигатель:</label>
+                    <input  placeholder="Двигатель" name="engine" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">КПП:</label>
+                    <input  placeholder="КПП"  name="transmission" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Кузов:</label>
+                    <input  placeholder="Кузов"  name="body" type="text" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Год:</label>
+                    <input  placeholder="От" name="yearfrom" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input  placeholder="До"  name="yearbefore" type="number" class="form-control form-control-sm">
+                </div>
+            </div>
+
+            <div class="form-group pad row">
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Цена:</label>
+                    <input  placeholder="От" name="costfrom" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input  placeholder="До"  name="costbefore" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">Объем:</label>
+                    <input  placeholder="От" name="capacityfrom" type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group pad col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <input  placeholder="До"  name="capacitybefore" type="number" class="form-control form-control-sm">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label class="col-md-1 col-form-label col-form-label-sm">&nbsp;</label>
+                    <button class="btn btn-outline-primary btn-sm" type="submit">Отфильтровать</button>
+                </div>
+            </div>
+
+        </form>
+        <br>
+    </div>
+
+    <div class="table-responsive container ">
+        <h5>Все автомобили: <a th:text="${size}"></a> </h5>
+        <table class="table table-sm table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>Авто</th>
+                <th>Год</th>
+                <th>Цена</th>
+                <th>Город</th>
+                <th>КПП</th>
+                <th>Двигатель</th>
+                <th>Кузов</th>
+                <th>Пробег</th>
+                <th>Объем</th>
+                <th>Выгода</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="filter : ${pageAuto}">
+                <td ><a th:href="${filter.url}"><span th:text="${filter.brand}"/> <span th:text="${filter.model}"/></a></td>
+                <td th:text="${filter.year}"></td>
+                <td th:text="${filter.cost}"></td>
+                <td th:text="${filter.city}"></td>
+                <td th:text="${filter.transmission}"></td>
+                <td th:text="${filter.engine}"></td>
+                <td th:text="${filter.body}"></td>
+                <td th:text="${filter.mileage}"></td>
+                <td th:text="${filter.capacity}"></td>
+                <td><a th:text="${filter.profit}"/>%</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    </body>
+    </html>
+</div>
